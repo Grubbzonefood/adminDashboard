@@ -1,19 +1,21 @@
 import { Input } from "@/components/ui/input";
-import { Label } from "@radix-ui/react-label";
+import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import {signInWithEmailAndPassword} from "firebase/auth"
+import { auth } from "@/Config/FirebaseConfig";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // handle login logic here
-    console.log({ email, password });
-    navigate("/dashboard");
+    const user = await signInWithEmailAndPassword(auth, email, password)
+  localStorage.setItem("grubbzone_authToken", await user.user.getIdToken());
+  navigate("/dashboard");
   };
 
   return (
