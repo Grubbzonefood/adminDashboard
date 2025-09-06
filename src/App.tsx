@@ -8,10 +8,12 @@ import VendorsPages from "./pages/VendorsPages";
 import MenuPage from "./pages/MenuPage";
 import CustomersPage from "./pages/CustomersPage";
 import RidersPage from "./pages/RidersPage";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   return (
     <Routes>
+      <Route index element={<LoginPage />} />
       <Route element={<MainLayout />}>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/orders" element={<OrdersPage />} />
